@@ -1,2 +1,2 @@
-selenide_examples
+Selenide examples
 =================
