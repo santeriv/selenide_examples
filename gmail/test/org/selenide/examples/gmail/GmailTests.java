@@ -10,6 +10,7 @@ import static com.codeborne.selenide.DOM.$;
 import static com.codeborne.selenide.Navigation.baseUrl;
 import static com.codeborne.selenide.Navigation.open;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
 public abstract class GmailTests {
   @Rule
@@ -26,7 +27,8 @@ public abstract class GmailTests {
 
   @AfterClass
   public static void logout() {
-    $(byText("Sign out")).click();
+    //$(byText("Sign out")).click();
+    closeWebDriver();
   }
 
   private static void login() {
