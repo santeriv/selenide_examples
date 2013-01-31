@@ -37,7 +37,7 @@ public class NewMailSpec extends GmailTests {
     switchTo().defaultContent();
     $(byText("Send")).click();
     $(withText("Your message has been sent.")).should(appear);
-    waitUntil(byText("Undo"), disappears, 10000);
+    waitUntil(byText("Undo"), disappears, 12000);
 
     assertUserCanSeeSentEmails();
   }
