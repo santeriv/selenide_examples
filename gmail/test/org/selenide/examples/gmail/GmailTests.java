@@ -32,8 +32,8 @@ public abstract class GmailTests {
   }
 
   private static void login() {
-    $("#Email").type("drusha49@gmail.com");
-    $("#Passwd").type(System.getProperty("password"));
+    $("#Email").val("drusha49@gmail.com");
+    $("#Passwd").val(System.getProperty("password"));
     $("#signIn").click();
   }
 }
