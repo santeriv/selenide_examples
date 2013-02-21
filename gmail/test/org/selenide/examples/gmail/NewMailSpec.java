@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.DOM.*;
+import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 
@@ -33,7 +33,7 @@ public class NewMailSpec extends GmailTests {
     switchTo().defaultContent();
     $(byText("Send")).click();
     $(withText("Your message has been sent.")).should(appear);
-    waitUntil(byText("Undo"), disappears, 12000);
+    $(byText("Undo")).waitUntil(disappears, 12000);
 
     assertUserCanSeeSentEmails();
   }
