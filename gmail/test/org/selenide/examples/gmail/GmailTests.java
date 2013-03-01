@@ -6,10 +6,9 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Navigation.baseUrl;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
 public abstract class GmailTests {
@@ -33,7 +32,7 @@ public abstract class GmailTests {
 
   private static void login() {
     $("#Email").val("drusha49@gmail.com");
-    $("#Passwd").val(System.getProperty("password"));
+    $("#Passwd").val(System.getProperty("password", "selenide"));
     $("#signIn").click();
   }
 }
