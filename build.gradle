@@ -36,7 +36,7 @@ subprojects {
 
   test {
     systemProperties 'file.encoding': 'UTF-8'
-    systemProperties['browser'] = 'htmlunit'
+    //systemProperties['browser'] = 'htmlunit'
     testLogging.showStandardStreams = true
   }
 
