@@ -1,1 +1,1 @@
-include "gmail"
+include "gmail", "github"
