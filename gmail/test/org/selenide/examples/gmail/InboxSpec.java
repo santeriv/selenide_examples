@@ -3,7 +3,7 @@ package org.selenide.examples.gmail;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byAttribute;
+import static com.codeborne.selenide.Selectors.by;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -20,11 +20,11 @@ public class InboxSpec extends GmailTests {
 
   @Test
   public void googlePlusNotificationsAreShownInTopRightCorner() {
-    $(byAttribute("title", "Notifications")).shouldHave(text("3"));
+    $(by("title", "Notifications")).shouldHave(text("3"));
   }
 
   @Test
   public void userCanRefreshMessages() {
-    $(byAttribute("title", "Refresh")).click();
+    $(by("title", "Refresh")).click();
   }
 }

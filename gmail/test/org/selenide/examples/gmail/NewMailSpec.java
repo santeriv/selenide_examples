@@ -1,12 +1,12 @@
 package org.selenide.examples.gmail;
 
+import com.codeborne.selenide.SelenideElement;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.withText;
 
 public class NewMailSpec extends GmailTests {
   @Test
@@ -15,8 +15,9 @@ public class NewMailSpec extends GmailTests {
     $(By.name("to")).val("andrei.solntsev@gmail.com");
     $(By.name("subject")).val("Agile Saturday test!");
 
-    switchTo().frame($(".editable").toWebElement());
-
+    final SelenideElement mailBodyFrame = $(by("aria-label", "Opened text area for composing a reply")).find("iframe");
+    switchTo().frame(mailBodyFrame.toWebElement());
+    sleep(1000);
     $("body").val("Hello braza!").pressEnter();
 
     switchTo().defaultContent();
