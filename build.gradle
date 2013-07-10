@@ -23,7 +23,7 @@ subprojects {
 
   dependencies {
     testCompile  'org.seleniumhq.selenium:selenium-java:2.33.0'
-    testCompile 'com.codeborne:selenide:2.2'
+    testCompile 'com.codeborne:selenide:2.3'
   }
 
   task libs(type: Sync) {
