@@ -16,14 +16,14 @@ subprojects {
 
   repositories{
     mavenCentral()
-//    maven {
-//        url "https://oss.sonatype.org/content/repositories/snapshots/"
-//    }
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
   }
 
   dependencies {
     testCompile  'org.seleniumhq.selenium:selenium-java:2.33.0'
-    testCompile 'com.codeborne:selenide:2.3'
+    testCompile 'com.codeborne:selenide:2.4-SNAPSHOT'
   }
 
   task libs(type: Sync) {

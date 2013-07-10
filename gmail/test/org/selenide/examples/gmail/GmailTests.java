@@ -5,7 +5,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.appears;
+import static com.codeborne.selenide.Condition.disappears;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Configuration.timeout;
 import static com.codeborne.selenide.Selectors.byText;
@@ -24,7 +25,12 @@ public abstract class GmailTests {
     open("/");
     login();
 
-    $(byText("Inbox (11)")).shouldBe(visible);
+    $(byText("Inbox (11)")).waitUntil(appears, 20000);
+    waitUntilPagesIsLoaded();
+  }
+
+  protected static void waitUntilPagesIsLoaded() {
+    $(byText("Loading")).waitUntil(disappears, 20000);
   }
 
   @AfterClass
