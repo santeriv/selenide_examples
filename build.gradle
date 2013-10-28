@@ -22,7 +22,6 @@ subprojects {
   }
 
   dependencies {
-    testCompile 'org.seleniumhq.selenium:selenium-java:2.35.0'
     testCompile 'com.codeborne:selenide:2.4'
   }
 
