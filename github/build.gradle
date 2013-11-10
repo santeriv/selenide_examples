@@ -1,3 +1,7 @@
+test {
+  useTestNG()
+}
+
 dependencies {
-  testCompile 'org.testng:testng:6.8'
+  testCompile 'org.testng:testng:6.8.7'
 }
