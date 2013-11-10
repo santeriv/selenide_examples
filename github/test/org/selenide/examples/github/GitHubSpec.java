@@ -1,12 +1,15 @@
 package org.selenide.examples.github;
 
+import com.codeborne.selenide.testng.BrowserPerTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.open;
 import static java.util.Arrays.asList;
 
+@Listeners(BrowserPerTest.class)
 public class GitHubSpec {
   private SearchPage searchPage;
 
