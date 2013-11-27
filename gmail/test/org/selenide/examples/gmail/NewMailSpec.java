@@ -13,7 +13,7 @@ public class NewMailSpec extends GmailTests {
     $(byText("COMPOSE")).click();
     waitUntilPagesIsLoaded();
     $(By.name("to")).val("andrei.solntsev@gmail.com").pressTab();
-    $(by("placeholder", "Subject")).val("Agile Saturday test!").pressTab();
+    $(by("placeholder", "Subject")).val("ConfetQA demo!").pressTab();
 
     $(".editable").val("Hello braza!").pressEnter();
     $(byText("Send")).click();
@@ -22,7 +22,7 @@ public class NewMailSpec extends GmailTests {
     $(byText("Undo")).click();
 //    $(byText("Sending has been undone.")).should(appear);
 
-    $(".editable").should(appear).append("This is Agile Saturday").pressEnter();
+    $(".editable").should(appear).append("Hello from ConfetQA Selen").pressEnter().pressEnter();
 
     $(byText("Send")).click();
     $(withText("Your message has been sent.")).should(appear);
@@ -33,6 +33,6 @@ public class NewMailSpec extends GmailTests {
 
   private void assertUserCanSeeSentEmails() {
     $(byText("Sent Mail")).click();
-    $(byText("Agile Saturday test!")).shouldBe(visible);
+    $(byText("ConfetQA demo!")).shouldBe(visible);
   }
 }
