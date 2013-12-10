@@ -22,7 +22,7 @@ subprojects {
   }
 
   dependencies {
-    testCompile 'com.codeborne:selenide:2.5'
+    testCompile 'com.codeborne:selenide:2.6.2'
   }
 
   task libs(type: Sync) {
@@ -81,5 +81,5 @@ configure(subprojects.findAll { project -> project.name == 'game' }) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.8'
+    gradleVersion = '1.9'
 }
