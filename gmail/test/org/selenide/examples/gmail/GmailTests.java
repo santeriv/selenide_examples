@@ -4,7 +4,6 @@ import com.codeborne.selenide.junit.ScreenShooter;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
-import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.appears;
 import static com.codeborne.selenide.Condition.disappears;
@@ -41,7 +40,7 @@ public abstract class GmailTests {
   }
 
   private static void login() {
-    $(By.linkText("Sign in")).click();
+//    $(By.linkText("Sign in")).click();
     $("#Email").val("drusha49@gmail.com");
     $("#Passwd").val(System.getProperty("password", "selenide"));
     $("#signIn").click();
