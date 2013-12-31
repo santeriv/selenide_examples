@@ -1,7 +1,75 @@
 defaultTasks 'clean', 'test'
+apply plugin: 'download-task'
+
+buildscript { 
+  repositories{
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'de.undercouch:gradle-download-task:0.4'
+  }
+}
+
+def getPhantomJSFullPath() {
+  String phantomJsFileName = 'phantomjs'
+  String osName = System.getProperty('os.name').toLowerCase()
+  if (osName.contains("windows")) {
+    phantomJsFileName = phantomJsFileName+'.exe'; 
+  }
+  return getPhantomJSDir() + '/' + phantomJsFileName
+}
+
+
+def getPhantomJSDir() {
+  return "${buildDir}/phantomjs_extracted/"
+}
+
+def getPhantomJSZipFileName() {
+  String osName = System.getProperty('os.name').toLowerCase()
+  String osArch = System.getProperty('os.arch').toLowerCase()
+  println('osName='+osName)
+  println('osArch='+osArch)
+  String fileName = 'phantomjs-1.9.2-linux-x86_64.tar.bz2'
+  if (osName.contains("windows")) {
+    fileName = 'phantomjs-1.9.2-windows.zip'
+  }
+  return fileName
+}
+
+task fetchPhantom << {
+  download {
+    src 'https://phantomjs.googlecode.com/files/'+getPhantomJSZipFileName()
+    dest buildDir
+  }
+}
+
+def getPackedTree(File file) {
+  String fileName = file.getName()
+  String extension = ""
+  int i = fileName.lastIndexOf('.')
+  int p = Math.max(fileName.lastIndexOf('/'), fileName.lastIndexOf('\\'));
+  if (i > p) {
+    extension = fileName.substring(i+1);
+  }
+  println('packed extension ='+extension)
+  if(extension.contains('zip')) {
+    println('using zipTree')
+    return zipTree(file).filter{it.path.matches(".*(phantomjs.exe).*")}
+  }
+  else {
+    println('using tarTree')
+    return tarTree(file).filter{it.path.matches(".*(bin/).*")}
+  }
+}
+
+task unzipPhantom(dependsOn: 'fetchPhantom',type: Copy) {
+  from getPackedTree(file("${buildDir}/"+getPhantomJSZipFileName()))
+  into getPhantomJSDir()
+}
 
 subprojects {
   apply plugin: 'java'
+  apply plugin: 'maven'
 
   sourceSets {
     main {
@@ -16,13 +84,11 @@ subprojects {
 
   repositories{
     mavenCentral()
-//    maven {
-//      url "https://oss.sonatype.org/content/repositories/snapshots/"
-//    }
   }
 
   dependencies {
     testCompile 'com.codeborne:selenide:2.6.2'
+    testCompile 'com.github.detro.ghostdriver:phantomjsdriver:1.0.4'
   }
 
   task libs(type: Sync) {
@@ -37,7 +103,14 @@ subprojects {
 
   test {
     systemProperties 'file.encoding': 'UTF-8'
-    //systemProperties['browser'] = 'htmlunit'
+//    systemProperties['browser'] = 'htmlunit'
+    testLogging.showStandardStreams = true
+  }
+
+  task phantomjs(type: Test) {
+    systemProperties['browser'] = 'phantomjs'
+    systemProperties['phantomjs.binary.path'] = getPhantomJSFullPath()
+    systemProperties 'file.encoding': 'UTF-8'
     testLogging.showStandardStreams = true
   }
 
